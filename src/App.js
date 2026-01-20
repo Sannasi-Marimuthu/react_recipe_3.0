@@ -1,16 +1,28 @@
-import React from "react";
-import { fetchData } from "./utils";
-
-// https://api-recipe.vercel.app/recipes/ - all recipes
-// https://api-recipe.vercel.app/recipes/10 - recipe by id
+import React, { useEffect, useState } from "react";
+import { fetchRecipes } from "./utils";
 
 const App = () => {
-  // fetch(getAllRecipes).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err))
+  const [recipes, setRecipes] = useState([]); // ✅ default array
+useEffect(() => {
+  const fetchRecipesData = async () => {
+    const data = await fetchRecipes();
+    console.log("API DATA:", data); // 👈 THIS
+    setRecipes(data ?? []);
+  };
 
-  //  async, await, try, catch
-  fetchData()
+  fetchRecipesData();
+}, []);
 
-  return <div>App home page</div>;
+  return (
+    <div>
+      Recipe App
+      {recipes.length === 0 && <p>Loading...</p>}
+{
+    recipes.map((data,index) => (
+        <h3 key={index} >{data.title}</h3>
+      ))}
+    </div>
+  );
 };
 
 export default App;
