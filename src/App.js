@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchRecipes } from "./utils";
 import Loader from "./loader";
 import Header from "./header/Header";
+import RecipeList from "./recipeList/RecipeList";
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);
@@ -26,12 +27,13 @@ const App = () => {
     <div>
       <Header  title={"My App"} />
 
-{loading ? <Loader name={"recipes are loading"} /> :   recipes.map((item) => (
-        <div key={item.id}>
-          <p>{item.title}</p>
-          <p>{item.time}</p>
-        </div>
-      ))}
+{loading ? <Loader name={"recipes are loading"} /> : 
+
+
+<RecipeList recipes={recipes}/>
+
+
+}
   
 
 {/* condi ? true : false  */}
