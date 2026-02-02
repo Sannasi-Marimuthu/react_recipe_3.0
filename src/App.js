@@ -1,44 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { fetchRecipes } from "./utils";
-import Loader from "./loader";
+import { fetchRecipes, fetchRecipesById } from "./utils";
 import Header from "./header/Header";
 import RecipeList from "./recipeList/RecipeList";
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true)
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try{
+    const fetchRecipesData = async () => {
+      try {
         const data = await fetchRecipes();
-      console.log("FINAL DATA:", data);
-      setRecipes(data); // data is array
-      setLoading(false);
-      }
-      catch(err){
-        console.error("Error fetching data:", err);
+        setRecipes(data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
       }
     };
-    fetchData();
+    fetchRecipesData();
   }, []);
 
   return (
     <div>
-      <Header  title={"My App"} />
+      <Header title={"Recipe App"} />
 
-{loading ? <Loader name={"recipes are loading"} /> : 
-
-
-<RecipeList recipes={recipes}/>
-
-
-}
-  
-
-{/* condi ? true : false  */}
-
-    
+      <RecipeList recipes={recipes} />
     </div>
   );
 };

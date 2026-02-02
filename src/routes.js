@@ -1,22 +1,21 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App';
-import RecipeDetail from './recipeDetails/RecipeDetail';
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import RecipeDetail from "./recipeDetails/RecipeDetail";
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:<App />
+    path: "/",
+    element: <App/>,
   },
   {
-    path:"/recipes/:id",
+    path:"/recipe/:id",
     element:<RecipeDetail />
-  },
- 
-])
+  }
+]);
 
 const MyRoutes = () => {
-    return <RouterProvider router ={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
 export default MyRoutes;
